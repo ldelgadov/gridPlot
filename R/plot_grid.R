@@ -1,4 +1,16 @@
 
+###############################
+# Receive a dataframe, numcol for representation and a vector with titles
+# Generate plots with ,
+#    - x = 1st column of df
+#    - 1st part of y = 2nd column of df
+#    - 2nd part of y = other column of df
+# This works sequentially for all the other columns of df
+#
+# The plots are generated in a certain order, to be represented later with multiplot
+#
+#
+
 plot_grid <- function(df, numcol = 1, titles = c("title1")){
      max_col <- ncol(df)
      if (ncol(df) < 3){ print("not enough data")
