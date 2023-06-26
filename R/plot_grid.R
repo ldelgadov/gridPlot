@@ -8,7 +8,7 @@
 # This works sequentially for all the other columns of df
 #
 # The plots are generated in a certain order, to be represented later with multiplot
-#
+# The call to multiplot is generated with paste0 and executed with eval(parse(text = ...))
 #
 
 plot_grid <- function(df, numcol = 1, titles = c("title1")){
@@ -17,6 +17,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1")){
      } else{
           max_rows <- ceiling((max_col - 2) / numcol)
           y_max <- max(df[,2:max_col], na.rm = TRUE) * 1.05
+          y_min <- min(df[,2:max_col], na.rm = TRUE) * .95
           p <- list()
           p[[1]] <- lapply(names(df)[3],                                         # 1st plot
                            function(nm){ ggplot(data = df) +
@@ -25,7 +26,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1")){
                                      labs(title = titles[1]) +
                                      xlab("") +
                                      ylab(titles[2]) +
-                                     ylim(0,y_max)
+                                     ylim(y_min,y_max)
                            })
           j <- 3
           for(i in 4:max_col){
@@ -37,7 +38,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1")){
                                                  geom_line(aes (x= .data[[names(df)[1]]], y = .data[[nm]])) +
                                                  xlab("") +
                                                  ylab(titles[j]) +
-                                                 ylim(0,y_max)
+                                                 ylim(y_min,y_max)
                                        })
                     j <- j + 1
                } else if((((i - 2) - 1) %% max_rows) == 0 ){                        # 1st row
@@ -49,7 +50,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1")){
                                                  labs(title = titles[j]) +
                                                  xlab("") +
                                                  ylab("") +
-                                                 ylim(0,y_max)
+                                                 ylim(y_min,y_max)
                                        })
                     j <- j + 1
                } else{                                                              # Other plots
@@ -60,7 +61,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1")){
                                                  geom_line(aes (x= .data[[names(df)[1]]], y = .data[[nm]])) +
                                                  xlab("") +
                                                  ylab("") +
-                                                 ylim(0,y_max)
+                                                 ylim(y_min,y_max)
                                        })
                }
           }
