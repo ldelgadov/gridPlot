@@ -1,7 +1,3 @@
-library(devtools)
-#This creates the skeleton of an R package
-setwd("/Users/luisdelgadodelvalle/Documents/5 Sustainability/421/project/library")
-package.skeleton(name = "multiplot")
 
 ###############################
 # Multiple plot function from
