@@ -11,13 +11,14 @@
 # The call to multiplot is generated with paste0 and executed with eval(parse(text = ...))
 #
 
-plot_grid <- function(df, numcol = 1, titles = c("title1")){
+plot_grid <- function(df, numcol = 1, titles = c("title1"), yzero = TRUE){
      max_col <- ncol(df)
      if (ncol(df) < 3){ print("not enough data")
      } else{
           max_rows <- ceiling((max_col - 2) / numcol)
           y_max <- max(df[,2:max_col], na.rm = TRUE) * 1.05
-          y_min <- min(df[,2:max_col], na.rm = TRUE) * .95
+          if (yzero){ymin <- 0
+          } else{y_min <- min(df[,2:max_col], na.rm = TRUE) * .95}
           p <- list()
           p[[1]] <- lapply(names(df)[3],                                         # 1st plot
                            function(nm){ ggplot(data = df) +
