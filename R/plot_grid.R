@@ -17,7 +17,7 @@ plot_grid <- function(df, numcol = 1, titles = c("title1"), yzero = TRUE){
      } else{
           max_rows <- ceiling((max_col - 2) / numcol)
           y_max <- max(df[,2:max_col], na.rm = TRUE) * 1.05
-          if (yzero){ymin <- 0
+          if (yzero){y_min <- 0
           } else{y_min <- min(df[,2:max_col], na.rm = TRUE) * .95}
           p <- list()
           p[[1]] <- lapply(names(df)[3],                                         # 1st plot
