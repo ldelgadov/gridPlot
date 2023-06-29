@@ -10,6 +10,7 @@
 # The plots are generated in a certain order, to be represented later with multiplot
 # The call to multiplot is generated with paste0 and executed with eval(parse(text = ...))
 #
+###############################
 
 plot_grid <- function(df, numcol = 1, titles = c("title1"), yzero = TRUE){
      max_col <- ncol(df)
