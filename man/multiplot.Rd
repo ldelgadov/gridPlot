@@ -9,5 +9,5 @@ multiplot()
 multiplot
 }
 \examples{
-multiplot()
+
 }
